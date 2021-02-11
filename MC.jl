@@ -2,6 +2,7 @@ include("confs.jl")
 using Plots
 using JLD
 using Dates
+using Statistics
 
 """
 Function to generate and store samples for a single temperature.
@@ -17,97 +18,40 @@ Samples::Array{microstate,1} : An Array of samples, each entry is of type micros
 """
 function sampling(;
     T::Float64,
-    steps::Int64 = 10^8,
-    cutoff::Int64 = Int(floor(0.4 * steps)),
+    sweeps::Int64 = 10^4,
+    cutoff::Int64 = Int(floor(0.4 * sweeps)),
     σ::Float64 = 1.0,
-    J = [1.0, 0, 0],
-    L::Int64 = 16,
-    Q::Int64 = 32,
+    J = [1.0],
+    L::Int64 = 8,
+    Q::Int64 = 16,
     init_conf::Array{Int64,2} = ones(Int64, L, L),
 )
     conf = microstate(J = J, L = L, Q = Q, conf = init_conf)
-    samples = [conf]
-    for i = 1:steps
-        index = prop_index(conf)
-        val = mod1(conf.conf[index[1], index[2]] + Int(ceil(rand(Normal(0, σ)))), conf.Q)
-        if evol_cond(conf, index, val, T)
-            conf = prop_conf(conf, index, val)
+    L = conf.L
+    Q = conf.Q
+    samples = sample()
+    σ = 6
+    change_range = vcat(-σ:-1, 1:σ)
+    for i = 1:sweeps
+        #index = prop_index(conf)
+        for m = 1:L
+            for n = 1:L
+                #val = mod1(conf.conf[m, n] + rand(change_range), conf.Q)
+                val = rand(1:Q)
+                #val = mod1(conf.conf[m,n] + Int(ceil(rand(Normal(0, σ)))), conf.Q)
+                if accept(conf, (m, n), val, T)
+                    update(conf, (m, n), val)
+                end
+            end
         end
+
+
         i < cutoff + 1 && continue
 
-        push!(samples, conf)
+        push!(samples.E, conf.E)
+        push!(samples.M, sum(conf.conf) / conf.L^2)
 
     end
     #println("length of sample is ", length(samples))
-    return samples
+    return (samples, conf.conf)
 end
-
-
-"""
-Run the simulation for a series of different temps.
-
-Output:
-
-
-"""
-function driver()
-    #Temp = range(0.01, 1.5, length = 100)
-    Temp = [0.4, 0.6]
-
-    #Esamples = []
-    #Csamples = []
-    #=
-    simulation = Dict()
-    for J1 in [0, 0.4, 0.8, 1]
-    simulation["J1=$J1"] = []
-    for T in Temp
-        push!(simulation["J1=$J1"], sampling(T = T, J = [1.0, J1, 0]))
-    end
-    end
-    =#
-    Esim=[]
-    Csim=[]
-    simulation = []
-    J1 = [0, 0.4, 0.8, 1]
-    for k in 1:length(J1)
-        #=
-        simulation["E(T)"][k] = []
-        simulation["C(T)"][k] = []=#
-        Esamples = []
-        Csamples = []
-        for T in Temp
-            samples = sampling(T = T, J = [1.0, J1[k], 0])
-            Eavg = 0
-            E2avg = 0
-            for i = 1:length(samples)
-                Eavg += samples[i].E
-                E2avg += (samples[i].E)^2
-            end
-            Eavg = Eavg / length(samples)
-            E2avg = E2avg / length(samples)
-            C = 1 / T^2 * (E2avg - Eavg^2) / (samples[1].L)^2
-            Eavg = Eavg / samples[1].L^2
-
-            push!(Esamples, Eavg)
-            push!(Csamples, C)
-        end
-        push!(Esim,Esamples)
-        push!(Csim,Csamples)
-    end
-    push!(simulation,Esim)
-    push!(simulation,Csim)
-    #plot(Temp, Esamples)
-    #plot!(Temp, Csamples)
-
-    return simulation
-
-end
-@time sim = driver()
-#=
-println(length(sim[1][1]))
-println(length(sim[1][1]))=#
-my_time = Dates.now()
-save("Cal_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-#=
-save("Result_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-=#
