@@ -1,4 +1,4 @@
-include("MC.jl")
+include("MC_Max_def.jl")
 
 """
 Run the simulation for a series of different temps.
@@ -7,7 +7,7 @@ Output:
 
 
 """
-function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sweeps = 10^7, Temp = range(0.56, 0.648, length = 50))
+function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sweeps = 10^2, Temp = range(0.56, 0.648, length = 50))
     Esim = []
     Csim = []
     Bsim = []
@@ -48,7 +48,7 @@ function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sw
                 for j = ((i-1)*bin_size + 1) : i * bin_size
                     M_this_bin += samples[1].M[j] / bin_size
                 end
-                push!(Mbins, M_this_bin-Q/2-1/2)
+                push!(Mbins, M_this_bin)
             end
             M2 = mean(Mbins.^2)
             M4 = mean(Mbins.^4)
@@ -75,4 +75,5 @@ L = 8; Q = 16
 my_time = Dates.now()
 #save("Cal_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
 #save("Result_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-save("Metropolis_My_def_L_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
+save("Metropolis_Max_def_L_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
+#println("finished")
