@@ -1,4 +1,4 @@
-include("MC_Max_def.jl")
+include("MC.jl")
 
 """
 Run the simulation for a series of different temps.
@@ -48,7 +48,7 @@ function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sw
                 for j = ((i-1)*bin_size + 1) : i * bin_size
                     M_this_bin += samples[1].M[j] / bin_size
                 end
-                push!(Mbins, M_this_bin)
+                push!(Mbins, M_this_bin-Q/2-1/2)
             end
             M2 = mean(Mbins.^2)
             M4 = mean(Mbins.^4)
@@ -70,10 +70,9 @@ function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sw
     return simulation
 
 end
-L = 6; Q = 8
+L = 12; Q = 8
 @time sim = driver(L = L, Q = Q)
 my_time = Dates.now()
 #save("Cal_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
 #save("Result_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-save("Metropolis_Max_def_L_iter10e6_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-#println("finished")
+save("Metropolis_My_def_ite10e7_L_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)

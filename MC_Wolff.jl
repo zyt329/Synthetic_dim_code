@@ -100,8 +100,13 @@ function Wolff_update(conf::microstate, T::Float64)
             (current_index[1], mod1(current_index[2] - 1, L)),
         )
         for neighb in neighbours
-            if (neighb ∉ discovered) &&
-               bond(conf, current_index, neighb, mod1(conf.conf[neighb[1], neighb[2]] + val, conf.Q), T)
+            if (neighb ∉ discovered) && bond(
+                conf,
+                current_index,
+                neighb,
+                mod1(conf.conf[neighb[1], neighb[2]] + val, conf.Q),
+                T,
+            )
                 search_flip(conf, neighb, val, T)
             end
         end
@@ -161,15 +166,15 @@ Output:
 
 
 """
-function driver(; L = 8, Q = 16, sweeps = 10^5)
-    Temp = range(0.550, 0.696, length = 50)
+function driver(; L = 8, Q = 16, sweeps = 10^3)
+    Temp = range(0.1, 10, length = 50)
     #Temp = [0.4, 0.6]
     #L = 16##more variables can be specified here
 
     Esim = []
     Csim = []
     simulation = []
-    J1 = [0.0, 0.4, 0.8]
+    J1 = [0.4]
     for k = 1:length(J1)
         #=
         simulation["E(T)"][k] = []
@@ -204,6 +209,35 @@ function driver(; L = 8, Q = 16, sweeps = 10^5)
         push!(Esim, Esamples)
         push!(Csim, Csamples)
     end
+    Esamples = []
+    Csamples = []
+    init_conf= ones(Int64, L, L)
+    for T in Temp
+        samples = sampling(
+            T = T,
+            J = [(1+2*J1[1]*cos(2π/Q))],
+            L = L,
+            Q = Q,
+            sweeps = sweeps,
+            init_conf = init_conf,
+        )
+        Eavg = 0
+        E2avg = 0
+        for i = 1:length(samples[1].E)
+            Eavg += samples[1].E[i]
+            E2avg += (samples[1].E[i])^2
+        end
+        Eavg = Eavg / length(samples[1].E)
+        E2avg = E2avg / length(samples[1].E)
+        C = 1 / T^2 * (E2avg - Eavg^2) / L^2
+        Eavg = Eavg / L^2
+
+        push!(Esamples, Eavg)
+        push!(Csamples, C)
+        init_conf = samples[2]
+    end
+    push!(Esim, Esamples)
+    push!(Csim, Csamples)
     push!(simulation, Esim)
     push!(simulation, Csim)
     #plot(Temp, Esamples)
