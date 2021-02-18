@@ -7,7 +7,7 @@ Output:
 
 
 """
-function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sweeps = 10^2, Temp = range(0.56, 0.648, length = 50))
+function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sweeps = 10^7, Temp = range(0.56, 0.648, length = 50))
     Esim = []
     Csim = []
     Bsim = []
@@ -75,5 +75,5 @@ L = 8; Q = 16
 my_time = Dates.now()
 #save("Cal_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
 #save("Result_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-save("Metropolis_Max_def_L_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
+save("Metropolis_Max_def_L_iter10e6_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
 #println("finished")

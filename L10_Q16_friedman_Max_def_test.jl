@@ -70,7 +70,7 @@ function driver(; L = 8, Q = 16, J1 = [range(0.0, 1.0, length = 5);0.4;0.45], sw
     return simulation
 
 end
-L = 6; Q = 8
+L = 10; Q = 16
 @time sim = driver(L = L, Q = Q)
 my_time = Dates.now()
 #save("Cal_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
