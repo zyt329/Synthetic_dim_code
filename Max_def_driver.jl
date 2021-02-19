@@ -75,5 +75,5 @@ L = 6; Q = 8
 my_time = Dates.now()
 #save("Cal_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
 #save("Result_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-save("Metropolis_Max_def_L_iter10e6_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-#println("finished")
+save("/nfs/home/zyt329/Research/Synthetic_dim_code/Remote_result/Metropolis_Max_def_L_$(L)__Q_$(Q)__Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
+println("L=$L, Q=$Q, Max_def finished at $(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))")
