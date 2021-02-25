@@ -1,0 +1,116 @@
+4.0
+ 49.184152 seconds (230.16 M allocations: 6.916 GiB, 1.23% gc time)
+L=6, Q=8, Max_def finished at Sun_21_Feb_2021_01_21_56
+
+signal (2): Interrupt
+in expression starting at /nfs/home/zyt329/Research/Synthetic_dim_code/L6_Q8_shullMax_def_driver.jl:74
+toInt64 at ./boot.jl:637 [inlined]
+Type at ./boot.jl:710 [inlined]
+convert at ./number.jl:7 [inlined]
+rem at ./int.jl:456 [inlined]
+- at ./int.jl:872 [inlined]
+fld at ./int.jl:238 [inlined]
+mod at ./int.jl:217 [inlined]
+mod1 at ./operators.jl:777 [inlined]
+Energy_Diff at /nfs/home/zyt329/Research/Synthetic_dim_code/confs_Max_def.jl:110
+accept at /nfs/home/zyt329/Research/Synthetic_dim_code/confs_Max_def.jl:216
+#sampling#5 at /nfs/home/zyt329/Research/Synthetic_dim_code/MC_Max_def.jl:42
+#sampling at ./float.jl:0 [inlined]
+#driver#6 at /nfs/home/zyt329/Research/Synthetic_dim_code/L6_Q8_shullMax_def_driver.jl:22
+#driver at ./none:0
+unknown function (ip: 0x7fa7cd5534a2)
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2197
+do_call at /buildworker/worker/package_linux64/build/src/interpreter.c:323
+eval_value at /buildworker/worker/package_linux64/build/src/interpreter.c:411
+eval_stmt_value at /buildworker/worker/package_linux64/build/src/interpreter.c:362 [inlined]
+eval_body at /buildworker/worker/package_linux64/build/src/interpreter.c:772
+jl_interpret_toplevel_thunk_callback at /buildworker/worker/package_linux64/build/src/interpreter.c:884
+unknown function (ip: 0xfffffffffffffffe)
+unknown function (ip: 0x7fa7b34a1f8f)
+unknown function (ip: 0x6)
+jl_interpret_toplevel_thunk at /buildworker/worker/package_linux64/build/src/interpreter.c:893
+jl_toplevel_eval_flex at /buildworker/worker/package_linux64/build/src/toplevel.c:815
+jl_parse_eval_all at /buildworker/worker/package_linux64/build/src/ast.c:873
+jl_load at /buildworker/worker/package_linux64/build/src/toplevel.c:879
+include at ./boot.jl:328 [inlined]
+include_relative at ./loading.jl:1094
+include at ./Base.jl:31
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2191
+exec_options at ./client.jl:295
+_start at ./client.jl:464
+jl_apply_generic at /buildworker/worker/package_linux64/build/src/gf.c:2191
+jl_apply at /buildworker/worker/package_linux64/build/ui/../src/julia.h:1614 [inlined]
+true_main at /buildworker/worker/package_linux64/build/ui/repl.c:96
+main at /buildworker/worker/package_linux64/build/ui/repl.c:217
+__libc_start_main at /build/glibc-2ORdQG/glibc-2.27/csu/../csu/libc-start.c:310
+_start at /nfs/software/julia/julia-1.2.0/bin/julia (unknown line)
+unknown function (ip: 0xffffffffffffffff)
+Allocations: 37615609 (Pool: 37611518; Big: 4091); GC: 62
+4.0
+ERROR: could not open file /nfs/home/zyt329/Research/Synthetic_dim_code/L10_Q16_friedmanMax_def_wideTemp_driver.jltop
+Stacktrace:
+ [1] include at ./boot.jl:328 [inlined]
+ [2] include_relative(::Module, ::String) at ./loading.jl:1094
+ [3] include(::Module, ::String) at ./Base.jl:31
+ [4] exec_options(::Base.JLOptions) at ./client.jl:295
+ [5] _start() at ./client.jl:464
+4.0
+5323.975676 seconds (21.97 G allocations: 653.138 GiB, 1.02% gc time)
+L=6, Q=8, Max_def_10e6 finished at Sun_21_Feb_2021_03_36_42
+4.0
+5339.484959 seconds (22.69 G allocations: 674.505 GiB, 1.04% gc time)
+L=6, Q=16, Max_def_10e6 finished at Sun_21_Feb_2021_03_37_38
+4.0
+9017.570292 seconds (39.48 G allocations: 1.147 TiB, 0.95% gc time)
+L=8, Q=8, Max_def_10e6 finished at Sun_21_Feb_2021_04_39_27
+4.0
+9757.781158 seconds (45.44 G allocations: 1.321 TiB, 0.99% gc time)
+L=8, Q=16, Max_def_10e6 finished at Sun_21_Feb_2021_04_52_31
+4.0
+9188.410837 seconds (33.66 G allocations: 999.650 GiB, 0.94% gc time)
+L=6, Q=16, Max_def_wideTemp finished at Sun_21_Feb_2021_04_55_53
+4.0
+9594.652785 seconds (38.29 G allocations: 1.111 TiB, 0.98% gc time)
+L=6, Q=8, Max_def_wideTemp finished at Sun_21_Feb_2021_05_02_04
+4.0
+14287.722059 seconds (61.90 G allocations: 1.800 TiB, 0.90% gc time)
+L=10, Q=8, Max_def_10e6 finished at Sun_21_Feb_2021_06_09_27
+4.0
+15992.090632 seconds (75.50 G allocations: 2.196 TiB, 0.95% gc time)
+L=10, Q=16, Max_def_10e6 finished at Sun_21_Feb_2021_06_38_11
+4.0
+16232.718064 seconds (62.94 G allocations: 1.828 TiB, 0.85% gc time)
+L=8, Q=16, Max_def_wideTemp finished at Sun_21_Feb_2021_06_53_54
+4.0
+16601.484064 seconds (68.40 G allocations: 1.987 TiB, 0.89% gc time)
+L=8, Q=8, Max_def_wideTemp finished at Sun_21_Feb_2021_06_59_46
+4.0
+20290.449087 seconds (89.43 G allocations: 2.601 TiB, 0.87% gc time)
+L=12, Q=8, Max_def_10e6 finished at Sun_21_Feb_2021_07_50_08
+4.0
+22653.971587 seconds (112.29 G allocations: 3.266 TiB, 0.97% gc time)
+L=12, Q=16, Max_def_10e6 finished at Sun_21_Feb_2021_08_30_03
+4.0
+26139.562715 seconds (100.57 G allocations: 2.924 TiB, 0.81% gc time)
+L=10, Q=16, Max_def_wideTemp finished at Sun_21_Feb_2021_09_43_30
+4.0
+27476.751748 seconds (121.78 G allocations: 3.543 TiB, 0.87% gc time)
+L=14, Q=8, Max_def_10e6 finished at Sun_21_Feb_2021_09_51_34
+4.0
+26774.604200 seconds (107.26 G allocations: 3.118 TiB, 0.84% gc time)
+L=10, Q=8, Max_def_wideTemp finished at Sun_21_Feb_2021_09_54_05
+4.0
+32087.300961 seconds (155.60 G allocations: 4.527 TiB, 0.94% gc time)
+L=14, Q=16, Max_def_10e6 finished at Sun_21_Feb_2021_11_08_33
+4.0
+35358.439011 seconds (159.37 G allocations: 4.637 TiB, 0.86% gc time)
+L=16, Q=8, Max_def_10e6 finished at Sun_21_Feb_2021_12_03_19
+4.0
+36969.383679 seconds (146.30 G allocations: 4.254 TiB, 0.80% gc time)
+L=12, Q=16, Max_def_wideTemp finished at Sun_21_Feb_2021_12_44_58
+4.0
+37859.651673 seconds (154.49 G allocations: 4.493 TiB, 0.82% gc time)
+L=12, Q=8, Max_def_wideTemp finished at Sun_21_Feb_2021_12_59_33
+4.0
+40227.064234 seconds (205.33 G allocations: 5.974 TiB, 0.97% gc time)
+L=16, Q=16, Max_def_10e6 finished at Sun_21_Feb_2021_13_24_42

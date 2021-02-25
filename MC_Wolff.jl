@@ -1,4 +1,4 @@
-include("confs.jl")
+include("confs_Wolff_Max_def.jl")
 using Plots
 using JLD
 using Dates
@@ -12,6 +12,7 @@ function bond_energy_diff(
     neighb::Tuple{Int64,Int64},
     val::Int64,
 )
+    Q = conf.Q
     S = conf.conf
     q = length(conf.J)
     J = conf.J
@@ -19,12 +20,24 @@ function bond_energy_diff(
     neighb_val = S[neighb[1], neighb[2]]
     ΔE = 0
     for k = 1:q
-        if abs(val - current_val) == (k - 1)
+        if (
+            val - mod1(current_val + (k - 1), Q) == 0 ||
+            val - mod1(current_val - (k - 1), Q) == 0
+        )
+            ΔE += J[k]
+        end
+        if (
+            current_val - mod1(neighb_val + (k - 1), Q) == 0 ||
+            current_val - mod1(neighb_val - (k - 1), Q) == 0
+        )
+            ΔE -= J[k]
+        end
+        #=if abs(val - current_val) == (k - 1)
             ΔE += J[k]
         end
         if abs(current_val - neighb_val) == (k - 1)
             ΔE -= J[k]
-        end
+        end=#
     end
     return ΔE
 end
@@ -111,8 +124,9 @@ function Wolff_update(conf::microstate, T::Float64)
             end
         end
     end
+    proposed_index = prop_index(conf)
     val = rand(new_val_range)
-    search_flip(conf, prop_index(conf), val, T)
+    search_flip(conf, proposed_index, val, T)
     #println(discovered)
     #return conf
     nothing
@@ -151,107 +165,9 @@ function sampling(;
         i < cutoff + 1 && continue
 
         push!(samples.E, conf.E)
-        push!(samples.M, sum(conf.conf) / conf.L^2)
+        push!(samples.M, abs(conf.M))
 
     end
     #println("length of sample is ", length(samples))
     return (samples, conf.conf)
 end
-
-
-"""
-Run the simulation for a series of different temps.
-
-Output:
-
-
-"""
-function driver(; L = 8, Q = 16, sweeps = 10^3)
-    Temp = range(0.1, 10, length = 50)
-    #Temp = [0.4, 0.6]
-    #L = 16##more variables can be specified here
-
-    Esim = []
-    Csim = []
-    simulation = []
-    J1 = [0.4]
-    for k = 1:length(J1)
-        #=
-        simulation["E(T)"][k] = []
-        simulation["C(T)"][k] = []=#
-        Esamples = []
-        Csamples = []
-        init_conf::Array{Int64,2} = ones(Int64, L, L)
-        for T in Temp
-            samples = sampling(
-                T = T,
-                J = [1.0, J1[k]],
-                L = L,
-                Q = Q,
-                sweeps = sweeps,
-                init_conf = init_conf,
-            )
-            Eavg = 0
-            E2avg = 0
-            for i = 1:length(samples[1].E)
-                Eavg += samples[1].E[i]
-                E2avg += (samples[1].E[i])^2
-            end
-            Eavg = Eavg / length(samples[1].E)
-            E2avg = E2avg / length(samples[1].E)
-            C = 1 / T^2 * (E2avg - Eavg^2) / L^2
-            Eavg = Eavg / L^2
-
-            push!(Esamples, Eavg)
-            push!(Csamples, C)
-            init_conf = samples[2]
-        end
-        push!(Esim, Esamples)
-        push!(Csim, Csamples)
-    end
-    Esamples = []
-    Csamples = []
-    init_conf= ones(Int64, L, L)
-    for T in Temp
-        samples = sampling(
-            T = T,
-            J = [(1+2*J1[1]*cos(2π/Q))],
-            L = L,
-            Q = Q,
-            sweeps = sweeps,
-            init_conf = init_conf,
-        )
-        Eavg = 0
-        E2avg = 0
-        for i = 1:length(samples[1].E)
-            Eavg += samples[1].E[i]
-            E2avg += (samples[1].E[i])^2
-        end
-        Eavg = Eavg / length(samples[1].E)
-        E2avg = E2avg / length(samples[1].E)
-        C = 1 / T^2 * (E2avg - Eavg^2) / L^2
-        Eavg = Eavg / L^2
-
-        push!(Esamples, Eavg)
-        push!(Csamples, C)
-        init_conf = samples[2]
-    end
-    push!(Esim, Esamples)
-    push!(Csim, Csamples)
-    push!(simulation, Esim)
-    push!(simulation, Csim)
-    #plot(Temp, Esamples)
-    #plot!(Temp, Csamples)
-
-    return simulation
-
-end
-@time sim = driver()
-#=
-println(length(sim[1][1]))
-println(length(sim[1][1]))=#
-my_time = Dates.now()
-save("Wolff.jld", "sim", sim)
-#=
-save("Result_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld", "sim", sim)
-=#
