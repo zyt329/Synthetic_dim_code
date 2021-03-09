@@ -91,7 +91,7 @@ function driver(;
     return simulation
 
 end
-L = 6; Q = 16
+L = 10; Q = 16
 @time sim = driver(L = L, Q = Q)
 my_time = Dates.now()
 save(
