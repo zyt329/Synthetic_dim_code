@@ -7,28 +7,56 @@ Q = 16
 sim = []
 push!(
     sim,
-    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Max_def_fineTemp_L_6__Q_16__sweeps_10e6_Date_Mon_22_Feb_2021_03_34_44.jld")["sim"],
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp4_L_6__Q_16__sweeps_10e7_Date_Fri_26_Feb_2021_21_08_54.jld")["sim"],
 )
 push!(
     sim,
-    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Max_def_fineTemp_L_8__Q_16__sweeps_10e6_Date_Mon_22_Feb_2021_05_31_34.jld")["sim"],
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp3_L_6__Q_16__sweeps_10e7_Date_Fri_26_Feb_2021_21_06_42.jld")["sim"],
 )
 push!(
     sim,
-    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Max_def_fineTemp_L_10__Q_16__sweeps_10e6_Date_Mon_22_Feb_2021_07_59_45.jld")["sim"],
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp2_L_6__Q_16__sweeps_10e7_Date_Fri_26_Feb_2021_01_12_44.jld")["sim"],
 )
 push!(
     sim,
-    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Max_def_fineTemp_L_12__Q_16__sweeps_10e6_Date_Mon_22_Feb_2021_11_23_38.jld")["sim"],
-)#=
-push!(
-    sim,
-    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-21/Metropolis_Max_def_wideTemp_L_14__Q_16__sweeps_10e6_Date_Sun_21_Feb_2021_17_50_34.jld")["sim"],
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp4_L_8__Q_16__sweeps_10e7_Date_Sat_27_Feb_2021_01_20_36.jld")["sim"],
 )
 push!(
     sim,
-    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-21/Metropolis_Max_def_wideTemp_L_16__Q_16__sweeps_10e6_Date_Sun_21_Feb_2021_22_09_39.jld")["sim"],
-)=#
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp3_L_8__Q_16__sweeps_10e7_Date_Sat_27_Feb_2021_01_06_41.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp2_L_8__Q_16__sweeps_10e7_Date_Fri_26_Feb_2021_08_27_14.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_alt_L_6__Q_16__sweeps_10e5_Date_Sun_28_Feb_2021_01_10_11.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_alt_L_8__Q_16__sweeps_10e5_Date_Sun_28_Feb_2021_01_23_17.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_alt_L_12__Q_16__sweeps_10e5_Date_Sun_28_Feb_2021_01_58_12.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp2_L_8__Q_16__sweeps_10e7_Date_Fri_26_Feb_2021_08_27_14.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Wolff_wideTempcomparision_L_6__Q_16__sweeps_10e6_Date_Thu_25_Feb_2021_00_35_35.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Wolff_wideTempcomparision_L_8__Q_16__sweeps_10e6_Date_Thu_25_Feb_2021_02_32_50.jld")["sim"],
+)
+push!(
+    sim,
+    load("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Remote_result_Feb-22/Metropolis_Wolff_wideTempcomparision_L_10__Q_16__sweeps_10e6_Date_Thu_25_Feb_2021_05_01_41.jld")["sim"],
+)
 
 function file2array(location::String)
     stream = open(location, "r")
@@ -50,7 +78,7 @@ Graphing Binder's ration corssing.
 
 k::Int64 : data corresonpdoing to J1=J1s[k] is running.
 """
-function Bcrossing(; Temp = range(0.3, 0.7, length = 100)#=range(0.56, 0.648, length = 50)=#, Ls = [6, 8, 10, 12], k)
+function Bcrossing(; Temp = range(0.3, 0.7, length = 100), Ls = [6, 8, 10, 12], k)#=range(0.56, 0.648, length = 50)=#
     plot(
         dpi = 800,
         xlabel = "T",
@@ -75,19 +103,82 @@ function Bcrossing(; Temp = range(0.3, 0.7, length = 100)#=range(0.56, 0.648, le
         plot!(Temp, MaxBinder, label = "Max's calculation, J1 = 0.45, L = 6")
     end=#
 
-    savefig("Bcrossing_graph/Bcrossing_fineTemp_J1_$(J1s[k])_Q_$Q.svg")
+    savefig("Bcrossing_graph/Bcrossing_Wolff_fineTemp_10e7_2Ls_J1_$(J1s[k])_Q_$Q.png")
+end
+#println(sim[1][3])
+println(length(cat(sim[1:length(sim)][3][1]..., dims = 1)'))
+function add_Bcrossing(; Temp, sim::Array, L, k)
+    Bvalues = []
+    for i in 1:length(sim)
+        push!(Bvalues, sim[i][3][k])
+    end
+    B = cat(Bvalues..., dims = 1)
+    plot!(Temp, B, label = "L = $(L)")
 end
 
 for k = 1:length(J1s)
-    Temps = [
-        [0.61, 0.63],
-        [0.59, 0.6],
-        [0.56, 0.58],
-        [0.61, 0.63],
-        [0.68, 0.75],
-        [0.57, 0.59],
-        [0.57, 0.58],
+    plot(
+        dpi = 800,
+        xlabel = "T",
+        ylabel = "Binder's ratio",
+        title = "size:6,8; Q = 16; J_1 = $(J1s[k])",
+        legend = :bottomleft,
+    )
+    Ls = [6, 8]
+    Temps1 = [
+        [0.598, 0.603],
+        [0.573, 0.588],
+        [0.552, 0.557],
+        [0.5899, 0.5904],
+        [0.55, 0.60],
+        [0.556, 0.561],
+        [0.555, 0.560],
     ]
-    Bcrossing(k = k,Temp = range(Temps[k][1], Temps[k][2], length = 10))
+    Temps2 = [
+        [0.605, 0.61],
+        [0.580, 0.584],
+        [0.559, 0.564],
+        [0.5905, 0.591],
+        [0.60, 0.65],
+        [0.562, 0.567],
+        [0.561, 0.565],
+    ]
+    Temps3 = [
+        [0.615, 0.625],
+        [0.585, 0.597],
+        [0.565, 0.575],
+        [0.60, 0.61],
+        [0.65, 0.75],
+        [0.568, 0.576],
+        [0.566, 0.574],
+    ]
+    Temp = cat(
+        range(Temps1[k][1], Temps1[k][2], length = 5),
+        range(Temps2[k][1], Temps2[k][2], length = 5),
+        range(Temps3[k][1], Temps3[k][2], length = 10),
+        dims = 1,
+    )
+    add_Bcrossing(L = 6, Temp = Temp, sim = [sim[1], sim[2], sim[3]], k = k)
+    add_Bcrossing(L = 8, Temp = Temp, sim = [sim[4], sim[5], sim[6]], k = k)
+    #=
+    for L in (6,8,10)
+        #Since Max didn't run J1=1, skip J1 = 1.
+        J1s[k] == 1 && continue
+        index_ini = Int(floor(J1s[k]/0.02))*50 + 1
+        index_final = index_ini + 49
+        Max_Temp = range(0.56,0.648,length = 50)
+        MaxBinder = file2array("E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result/Max_$(L)_B.txt")
+        plot!(Max_Temp, MaxBinder[index_ini: index_final], label = "Max, J1 = $(floor(J1s[k]/0.02)*0.02), L = $(L)")
+    end=#
+
+    Ls = (6,8,10)
+    for i in 1:3
+        #Since Max didn't run J1=1, skip J1 = 1.
+        Temp1 = range(0.4,0.9,length=50)
+        Binder = sim[10+i][3][k]
+        plot!(Temp1, Binder, label = "nonperiodic, J1 = $(J1s[k]), L = $(Ls[i])")
+    end
+
+    savefig("Bcrossing_graph/Bcrossing_Max_VS_nonperiodic_J1_$(J1s[k])_Q_$(Q)_combined.png")
 end
 #3,6,7

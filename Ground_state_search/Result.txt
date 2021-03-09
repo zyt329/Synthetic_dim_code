@@ -1,0 +1,79 @@
+For L = 3, Q = 2, J = [0, 1], Lowest E is -12.0, and degeneracy is 102
+  0.397320 seconds (1.20 M allocations: 61.975 MiB, 4.47% gc time)
+L=3, Q=2, L3_Q2_J_[0,1] finished search at Thu_04_Mar_2021_22_55_33
+4.0
+For L = 3, Q = 2, J = [1, 1], Lowest E is -18.0, and degeneracy is 512
+  0.402585 seconds (1.20 M allocations: 62.038 MiB, 4.46% gc time)
+L=3, Q=2, L3_Q2_J_[1,1] finished search at Thu_04_Mar_2021_22_55_41
+4.0
+For L = 3, Q = 4, J = [0, 1], Lowest E is -12.0, and degeneracy is 6702
+  0.875882 seconds (7.56 M allocations: 241.269 MiB, 4.47% gc time)
+L=3, Q=4, L3_Q4_J_[0,1] finished search at Thu_04_Mar_2021_22_55_57
+4.0
+For L = 3, Q = 4, J = [1, 1], Lowest E is -18.0, and degeneracy is 2038
+  0.871977 seconds (7.56 M allocations: 240.446 MiB, 3.84% gc time)
+L=3, Q=4, L3_Q4_J_[1,1] finished search at Thu_04_Mar_2021_22_56_21
+4.0
+For L = 3, Q = 6, J = [0, 1], Lowest E is -12.0, and degeneracy is 14994
+ 16.979627 seconds (224.90 M allocations: 6.129 GiB, 3.87% gc time)
+L=3, Q=6, L3_Q6_J_[0,1] finished search at Thu_04_Mar_2021_22_56_56
+4.0
+For L = 3, Q = 6, J = [1, 1], Lowest E is -18.0, and degeneracy is 3564
+ 17.300155 seconds (224.90 M allocations: 6.127 GiB, 3.01% gc time)
+L=3, Q=6, L3_Q6_J_[1,1] finished search at Thu_04_Mar_2021_22_57_15
+4.0
+For L = 3, Q = 8, J = [1, 1], Lowest E is -18.0, and degeneracy is 5090
+223.575613 seconds (2.86 G allocations: 77.204 GiB, 3.61% gc time)
+L=3, Q=8, L3_Q8_J_[1,1] finished search at Thu_04_Mar_2021_23_01_02
+4.0
+For L = 3, Q = 8, J = [0, 1], Lowest E is -12.0, and degeneracy is 23286
+225.205267 seconds (2.86 G allocations: 77.207 GiB, 4.45% gc time)
+L=3, Q=8, L3_Q8_J_[0,1] finished search at Thu_04_Mar_2021_23_00_57
+4.0
+For L = 4, Q = 2, J = [0, 1], Lowest E is -32.0, and degeneracy is 2
+  0.631559 seconds (3.47 M allocations: 127.455 MiB, 4.19% gc time)
+L=4, Q=2, L4_Q2_J_[0,1] finished search at Thu_04_Mar_2021_23_03_07
+4.0
+For L = 4, Q = 2, J = [1, 1], Lowest E is -32.0, and degeneracy is 65536
+  0.708479 seconds (3.47 M allocations: 141.437 MiB, 15.45% gc time)
+L=4, Q=2, L4_Q2_J_[1,1] finished search at Thu_04_Mar_2021_23_03_10
+4.0
+For L = 4, Q = 3, J = [0, 1], Lowest E is -32.0, and degeneracy is 512
+ 97.300017 seconds (1.16 G allocations: 32.133 GiB, 3.12% gc time)
+L=4, Q=3, L4_Q3_J_[0,1] finished search at Thu_04_Mar_2021_23_04_54
+4.0
+For L = 4, Q = 3, J = [1, 1], Lowest E is -32.0, and degeneracy is 254475
+ 98.974449 seconds (1.16 G allocations: 32.185 GiB, 6.81% gc time)
+L=4, Q=3, L4_Q3_J_[1,1] finished search at Thu_04_Mar_2021_23_05_03
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         4.0
+For L = 4, Q = 4, J = [0, 1], Lowest E is -32.0, and degeneracy is 1486
+8781.545166 seconds (104.51 G allocations: 2.792 TiB, 4.97% gc time)
+L=4, Q=4, L4_Q4_J_[0,1] finished search at Fri_05_Mar_2021_01_29_56
+4.0
+For L = 3, Q = 12, J = [0, 1], Lowest E is -12.0, and degeneracy is 39870
+8770.803000 seconds (105.54 G allocations: 2.771 TiB, 5.01% gc time)
+L=3, Q=12, L3_Q12_J_[0,1] finished search at Fri_05_Mar_2021_01_33_05
+4.0
+For L = 4, Q = 4, J = [1, 1], Lowest E is -32.0, and degeneracy is 452006
+8946.595700 seconds (104.51 G allocations: 2.792 TiB, 7.48% gc time)
+L=4, Q=4, L4_Q4_J_[1,1] finished search at Fri_05_Mar_2021_01_32_47
+4.0
+For L = 3, Q = 12, J = [1, 1], Lowest E is -18.0, and degeneracy is 8142
+8914.284613 seconds (105.54 G allocations: 2.771 TiB, 4.75% gc time)
+L=3, Q=12, L3_Q12_J_[1,1] finished search at Fri_05_Mar_2021_01_35_36
+4.0
+For L = 3, Q = 14, J = [0, 1], Lowest E is -12.0, and degeneracy is 48162
+33581.307097 seconds (417.99 G allocations: 10.963 TiB, 5.17% gc time)
+L=3, Q=14, L3_Q14_J_[0,1] finished search at Fri_05_Mar_2021_08_27_25
+4.0
+For L = 3, Q = 14, J = [1, 1], Lowest E is -18.0, and degeneracy is 9668
+34060.837422 seconds (417.99 G allocations: 10.963 TiB, 4.92% gc time)
+L=3, Q=14, L3_Q14_J_[1,1] finished search at Fri_05_Mar_2021_08_35_26
+4.0
+For L = 3, Q = 16, J = [1, 1], Lowest E is -18.0, and degeneracy is 11194
+107671.404522 seconds (1.38 T allocations: 36.133 TiB, 4.83% gc time)
+L=3, Q=16, L3_Q16_J_[1,1] finished search at Sat_06_Mar_2021_05_02_31
+4.0
+For L = 3, Q = 16, J = [0, 1], Lowest E is -12.0, and degeneracy is 56454
+107816.227530 seconds (1.38 T allocations: 36.133 TiB, 4.86% gc time)
+L=3, Q=16, L3_Q16_J_[0,1] finished search at Sat_06_Mar_2021_05_04_50
