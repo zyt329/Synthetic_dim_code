@@ -5,6 +5,12 @@ Run the simulation for a series of different temps.
 
 Output:
 
+Simulation::Array{Array,1} : It's an array that is of length 5.
+    1st entry : An array of Average E values for the simulated ranges of temperatures.
+    2nd entry : An array of Average C values for the simulated ranges of temperatures.
+    3rd entry : An array of Average Binder's ratios for the simulated ranges of temperatures.
+    4th entry : An array of ranges of temperatures that is simulated for different J1 values. Each entry correspond to one J1 value.
+    5th entry : An array of simulated J1 values.
 
 """
 function driver(;
@@ -12,7 +18,7 @@ function driver(;
     Q = 16,
     J1 = [range(0.0, 1.0, length = 5); 0.4; 0.45],
     sweeps = 10^6,
-    Temp = range(0.4,0.9,length = 50),
+    Temp = range(0.3,0.7,length=50),
 )
     #Temp = [0.4, 0.6]
     #L = 16##more variables can be specified here
@@ -22,19 +28,17 @@ function driver(;
     Bsim = []
     simulation = []
     #=Temps = [
-        [0.61, 0.63],
-        [0.59, 0.6],
-        [0.56, 0.58],
-        [0.61, 0.63],
-        [0.68, 0.75],
-        [0.57, 0.59],
-        [0.57, 0.58],
+        [0.598,0.603],
+        [0.573,0.588],
+        [0.552,0.557],
+        [0.5899,0.5904],
+        [0.55,0.60],
+        [0.556,0.561],
+        [0.555,0.560],
     ]=#
+    Temperatures = []
     for k = 1:length(J1)
-        #=
-        simulation["E(T)"][k] = []
-        simulation["C(T)"][k] = []=#
-        #Temp = range(Temps[k][1], Temps[k][2], length = 10)
+        #=Temp = range(Temps[k][1], Temps[k][2], length = 5)=#
         Esamples = []
         Csamples = []
         Bsamples = []
@@ -61,7 +65,7 @@ function driver(;
             push!(Esamples, Eavg)
             push!(Csamples, C)
             # Binning for M
-            num_bins = 5000
+            num_bins = 10000
             bin_size = Int(floor(length(samples[1].M) / num_bins))
             Mbins = []
             for i = 1:num_bins
@@ -81,28 +85,38 @@ function driver(;
         push!(Esim, Esamples)
         push!(Csim, Csamples)
         push!(Bsim, Bsamples)
+        push!(Temperatures, Temp)
     end
     push!(simulation, Esim)
     push!(simulation, Csim)
     push!(simulation, Bsim)
+    push!(simulation, Temperatures)
+    push!(simulation, J1)
     #plot(Temp, Esamples)
     #plot!(Temp, Csamples)
 
     return simulation
 
 end
-L = 6; Q = 16
-@time sim = driver(L = L, Q = Q)
+L = 6;Q = 16;
+J1 = [range(0.0, 1.0, length = 5); 0.4; 0.45];sweeps = 10^6;Temp = range(0.56, 0.65, length = 50)
+content = "Wolff_10000bin_sweep10e6"
+@time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
+
 my_time = Dates.now()
-save(
-    "/nfs/home/zyt329/Research/Synthetic_dim_code/Periodic_result/Metropolis_Wolff_wideTempcomparision_L_$(L)__Q_$(Q)__sweeps_10e6_Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld",
-    "sim",
-    sim,
-)
-println("L=$L, Q=$Q, T= 0.4-0.9, 50 points,Wolff_wideTempcomparision_10e6 finished at $(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))")
+save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/Wolff_test/"
+time_finished = "Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))"
+save_name = save_path*content*"_L_$(L)__Q_$(Q)__sweeps_$(sweeps)_"*time_finished*".jld"
+save(save_name, "sim", [sim,(content, L, Q, sweeps)])
 #=save(
-    "Test_Wolff_wideTempcomparision_L_$(L)__Q_$(Q)__sweeps_10e7_Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld",
+    "/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result/Metropolis_Wolff_fineTemp4_L_$(L)__Q_$(Q)__sweeps_10e7_Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld",
     "sim",
     sim,
 )
-println("L=$L, Q=$Q, Wolff_wideTempcomparision finished at $(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))")=#
+println("L=$L, Q=$Q, Wolff_fineTemp4_10e7 finished at $(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))")=#
+#=save(
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/test/"*content*"_L_$(L)__Q_$(Q)__sweeps_$(sweeps)_Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS")).jld",
+    "sim",
+    sim,
+)=#
+println("L=$L, Q=$Q,"*content*" finished at "*time_finished)
