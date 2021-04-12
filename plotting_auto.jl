@@ -70,6 +70,7 @@ function sims_plotting(
             ylabel = "Binder's ratio",
             title = "Binder's ratio : J_0 = 1.0",
             legend = :bottomleft,
+            legendfontsize=8,
         )
         for i = 1:length(simulations)#loop over different simulations(L,Q...)
             J1s = simulations[i][5]
@@ -79,7 +80,7 @@ function sims_plotting(
                     plot!(
                         Temp,
                         simulations[i][3][k],
-                        label = simulations_paras[i][1] *
+                        label = #=simulations_paras[i][1] *=#
                                 "_J1=$(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
@@ -89,7 +90,7 @@ function sims_plotting(
                     plot!(
                         Temp,
                         simulations[i][3][k],
-                        label = simulations_paras[i][1] *
+                        label = #=simulations_paras[i][1] *=#
                                 "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
