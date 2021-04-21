@@ -1,4 +1,4 @@
-include("confs_Wolff_Max_def.jl")
+include("confs_Wolff_newM.jl")
 using Plots
 using JLD
 using Dates
@@ -132,6 +132,15 @@ function Wolff_update(conf::microstate, T::Float64)
     nothing
 end
 
+function cal_M2(M::Array{Float64,1}, Q::Int64)
+    M2 = 0
+    for i = 1:Q
+        for j = 1:Q
+            M2 += M[i] * M[j] * (Q * ==(M[i], M[j]) - 1) / (Q - 1)
+        end
+    end
+    return M2
+end
 
 
 """
@@ -165,8 +174,7 @@ function sampling(;
         i < cutoff + 1 && continue
 
         push!(samples.E, conf.E)
-        push!(samples.M, abs(conf.M))
-
+        push!(samples.M, copy(conf.M))
     end
     #println("length of sample is ", length(samples))
     return (samples, conf.conf)
