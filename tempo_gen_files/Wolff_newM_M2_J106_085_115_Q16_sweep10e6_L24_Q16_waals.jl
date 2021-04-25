@@ -94,9 +94,9 @@ function driver(;
     return simulation
 
 end
-L = 16;Q = 16;
-J1 = (0.0,0.2,0.6,0.85,1.15);sweeps = 10^6;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
-content = "Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6"
+L = 24; Q = 16
+J1 = (0.6,0.85,1.15);sweeps = 10^6;Temp = range(0.01, 1, length = 10)#Temp range determined by fcn in the driver, not here.
+content = "Wolff_newM_M2_J106_085_115_Q16_sweep10e6"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
 my_time = Dates.now()
