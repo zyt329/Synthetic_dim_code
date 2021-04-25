@@ -11,7 +11,7 @@ function delta(x, y)
     end
 end
 
-function Energy(J,L,Q,conf)
+function Energy(J, L, Q, conf)
     S = conf
     E0 = 0
     n = length(J)
@@ -23,24 +23,24 @@ function Energy(J,L,Q,conf)
                         0.5 *
                         J[k] *
                         (
-                            delta(S[i, j], mod1(S[mod1(i - 1, L), j] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[mod1(i + 1, L), j] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[i, mod1(j - 1, L)] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[i, mod1(j + 1, L)] + (k - 1),Q))
+                            delta(S[i, j], mod1(S[mod1(i - 1, L), j] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[mod1(i + 1, L), j] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[i, mod1(j - 1, L)] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[i, mod1(j + 1, L)] + (k - 1), Q))
                         )
                 else
                     E0 -=
                         0.5 *
                         J[k] *
                         (
-                            delta(S[i, j], mod1(S[mod1(i - 1, L), j] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[mod1(i + 1, L), j] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[i, mod1(j - 1, L)] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[i, mod1(j + 1, L)] + (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[mod1(i - 1, L), j] - (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[mod1(i + 1, L), j] - (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[i, mod1(j - 1, L)] - (k - 1),Q)) +
-                            delta(S[i, j], mod1(S[i, mod1(j + 1, L)] - (k - 1),Q))
+                            delta(S[i, j], mod1(S[mod1(i - 1, L), j] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[mod1(i + 1, L), j] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[i, mod1(j - 1, L)] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[i, mod1(j + 1, L)] + (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[mod1(i - 1, L), j] - (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[mod1(i + 1, L), j] - (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[i, mod1(j - 1, L)] - (k - 1), Q)) +
+                            delta(S[i, j], mod1(S[i, mod1(j + 1, L)] - (k - 1), Q))
                         )
                 end
             end
@@ -75,8 +75,8 @@ mutable struct microstate
         Q::Int64 = 32,
         conf::Array{Int64,2} = ones(Int64, L, L),
     )
-        E::Float64 = Energy(J,L,Q,conf)
-        M = cal_M(conf,Q,L)
+        E::Float64 = Energy(J, L, Q, conf)
+        M = cal_M(conf, Q, L)
         new(J, L, Q, conf, E, M)
     end
     function microstate(;
@@ -85,8 +85,8 @@ mutable struct microstate
         Q::Int64 = 32,
         conf::Array{Int64,2} = ones(Int64, L, L),
     )
-        E::Float64 = Energy(J,L,Q,conf)
-        M = cal_M(conf,Q,L)
+        E::Float64 = Energy(J, L, Q, conf)
+        M = cal_M(conf, Q, L)
         new(J, L, Q, conf, E, M)
     end
     @assert(microstate().E == -128, "Something wrong with the energy calculation")
@@ -117,43 +117,41 @@ function Energy_Diff(conf::microstate, index::Tuple, val::Int64)
     for k = 1:q
         if k == 1
             ΔE -=
-                J[k] *
-                (
-                    delta(val, mod1(S[mod1(m - 1, L), n] + (k - 1),Q)) +
-                    delta(val, mod1(S[mod1(m + 1, L), n] + (k - 1),Q)) +
-                    delta(val, mod1(S[m, mod1(n - 1, L)] + (k - 1),Q)) +
-                    delta(val, mod1(S[m, mod1(n + 1, L)] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[mod1(m - 1, L), n] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[mod1(m + 1, L), n] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[m, mod1(n - 1, L)] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[m, mod1(n + 1, L)] + (k - 1),Q))
+                J[k] * (
+                    delta(val, mod1(S[mod1(m - 1, L), n] + (k - 1), Q)) +
+                    delta(val, mod1(S[mod1(m + 1, L), n] + (k - 1), Q)) +
+                    delta(val, mod1(S[m, mod1(n - 1, L)] + (k - 1), Q)) +
+                    delta(val, mod1(S[m, mod1(n + 1, L)] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[mod1(m - 1, L), n] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[mod1(m + 1, L), n] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[m, mod1(n - 1, L)] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[m, mod1(n + 1, L)] + (k - 1), Q))
                 )
         else
             ΔE -=
-                J[k] *
-                (
-                    delta(val, mod1(S[mod1(m - 1, L), n] + (k - 1),Q)) +
-                    delta(val, mod1(S[mod1(m + 1, L), n] + (k - 1),Q)) +
-                    delta(val, mod1(S[m, mod1(n - 1, L)] + (k - 1),Q)) +
-                    delta(val, mod1(S[m, mod1(n + 1, L)] + (k - 1),Q)) +
-                    delta(val, mod1(S[mod1(m - 1, L), n] - (k - 1),Q)) +
-                    delta(val, mod1(S[mod1(m + 1, L), n] - (k - 1),Q)) +
-                    delta(val, mod1(S[m, mod1(n - 1, L)] - (k - 1),Q)) +
-                    delta(val, mod1(S[m, mod1(n + 1, L)] - (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[mod1(m - 1, L), n] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[mod1(m + 1, L), n] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[m, mod1(n - 1, L)] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[m, mod1(n + 1, L)] + (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[mod1(m - 1, L), n] - (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[mod1(m + 1, L), n] - (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[m, mod1(n - 1, L)] - (k - 1),Q)) -
-                    delta(S[m, n], mod1(S[m, mod1(n + 1, L)] - (k - 1),Q))
+                J[k] * (
+                    delta(val, mod1(S[mod1(m - 1, L), n] + (k - 1), Q)) +
+                    delta(val, mod1(S[mod1(m + 1, L), n] + (k - 1), Q)) +
+                    delta(val, mod1(S[m, mod1(n - 1, L)] + (k - 1), Q)) +
+                    delta(val, mod1(S[m, mod1(n + 1, L)] + (k - 1), Q)) +
+                    delta(val, mod1(S[mod1(m - 1, L), n] - (k - 1), Q)) +
+                    delta(val, mod1(S[mod1(m + 1, L), n] - (k - 1), Q)) +
+                    delta(val, mod1(S[m, mod1(n - 1, L)] - (k - 1), Q)) +
+                    delta(val, mod1(S[m, mod1(n + 1, L)] - (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[mod1(m - 1, L), n] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[mod1(m + 1, L), n] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[m, mod1(n - 1, L)] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[m, mod1(n + 1, L)] + (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[mod1(m - 1, L), n] - (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[mod1(m + 1, L), n] - (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[m, mod1(n - 1, L)] - (k - 1), Q)) -
+                    delta(S[m, n], mod1(S[m, mod1(n + 1, L)] - (k - 1), Q))
                 )
         end
     end
     return ΔE
 end
-println(Energy_Diff(microstate(), (1,1), 0))
+println(Energy_Diff(microstate(), (1, 1), 0))
 
 #=
 """
@@ -208,6 +206,8 @@ function update(conf::microstate, index::Tuple, val::Int64)
     conf.M[conf.conf[index[1], index[2]]] -= 1 / conf.L^2
     conf.M[val] += 1 / conf.L^2
     conf.conf[index[1], index[2]] = val
+    #debug
+    #println(conf.M)
     nothing
 end
 
@@ -242,7 +242,7 @@ struct sample
     E::Array{Float64,1}
     M::Array{Array{Float64,1},1}
     function sample()
-        new(Float64[],Array{Float64,1}[])
+        new(Float64[], Array{Float64,1}[])
     end
 end
 

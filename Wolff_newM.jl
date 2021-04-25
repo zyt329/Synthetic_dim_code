@@ -1,4 +1,4 @@
-include("MC_Wolff.jl")
+include("MC_Wolff_newM.jl")
 include("Temp_range_gen.jl")
 
 """
@@ -54,21 +54,29 @@ function driver(;
                 sweeps = sweeps,
                 init_conf = init_conf,
             )
+            samplelength = length(samples[1].E)
             Eavg = 0
             E2avg = 0
-            for i = 1:length(samples[1].E)
+            for i = 1:samplelength
                 Eavg += samples[1].E[i]
                 E2avg += (samples[1].E[i])^2
             end
-            Eavg = Eavg / length(samples[1].E)
-            E2avg = E2avg / length(samples[1].E)
+            Eavg = Eavg / samplelength
+            E2avg = E2avg / samplelength
             C = 1 / T^2 * (E2avg - Eavg^2) / L^2
             Eavg = Eavg / L^2
             push!(Esamples, Eavg)
             push!(Csamples, C)
             # Calculating B
-            M2 = mean(samples[1].M .^ 2)
-            M4 = mean(samples[1].M .^ 4)
+            M2 = 0
+            M4 = 0
+            for M in samples[1].M
+                Δ = cal_M2(M, Q)
+                M2 += Δ
+                M4 += Δ^2
+            end
+            M2 = M2 / samplelength
+            M4 = M4 / samplelength
             B = 1 - M4 / (3 * M2^2)
             push!(Bsamples, B)
             #output the final configuration as the initial conf for the next temperature.
@@ -90,13 +98,14 @@ function driver(;
     return simulation
 
 end
-L = 6;Q = 16;
-J1 = range(0.49, 0.50, length = 2);sweeps = 10^6;Temp = range(0.5, 0.7, length = 50)#Temp range determined by fcn in the driver, not here.
-content = "Wolff_J1049_050_sweep10e6"
+L = 16;Q = 6;
+J1 = range(0.0, 1.15, length = 6);sweeps = 10^4;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
+content = "Wolff_newM_J1000_115_Q5_sweep10e6"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
 my_time = Dates.now()
-save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result/"
+save_path = "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/"
+#="/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result_newM/"=#
 time_finished = "Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))"
 save_name = save_path*content*"_L_$(L)__Q_$(Q)__sweeps_$(sweeps)_"*time_finished*".jld"
 save(save_name, "sim", [sim,(content, L, Q, sweeps)])
