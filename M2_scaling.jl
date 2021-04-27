@@ -4,19 +4,19 @@ using LsqFit
 using Statistics
 
 sims = [
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_8__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_00_30_43.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_10__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_00_38_05.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_12__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_00_47_19.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_14__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_01_00_53.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_16__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_01_15_26.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_18__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_01_33_52.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_20__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_01_56_13.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_22__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_02_23_29.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_24__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_03_05_04.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_26__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_03_43_52.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_28__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_04_29_48.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_30__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_05_08_59.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J106_085_115_Q16_sweep10e6_L_32__Q_16__sweeps_1000000_Date_Wed_21_Apr_2021_06_10_39.jld"
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_32__Q_16__sweeps_1000000_Date_Sat_24_Apr_2021_09_59_05.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_30__Q_16__sweeps_1000000_Date_Sat_24_Apr_2021_03_08_08.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_28__Q_16__sweeps_1000000_Date_Fri_23_Apr_2021_18_19_07.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_26__Q_16__sweeps_1000000_Date_Fri_23_Apr_2021_10_42_07.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_24__Q_16__sweeps_1000000_Date_Fri_23_Apr_2021_02_15_57.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_22__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_21_00_43.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_20__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_16_30_26.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_18__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_12_50_37.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_16__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_09_47_54.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_14__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_07_25_37.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_12__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_05_17_01.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_10__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_03_48_31.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6_L_8__Q_16__sweeps_1000000_Date_Thu_22_Apr_2021_02_40_39.jld"
 ]
 
 L = [8,10,12,14,16,18,20,22,24,26,28,30,32]
@@ -77,18 +77,38 @@ function exponent_fit(sims; J1_index::Int64, T_index::Int64)
     J1 = load(sims[1])["sim"][1][5][J1_index]
     T = load(sims[1])["sim"][1][4][J1_index][T_index]
     println("J1=$(J1),T=$(T)"*" parameters are $(fit.param)"*" mean squared error is $(mse)")
+    return fit.param[1]
+end
+
+
+for J1_index in 1:length(load(sims[1])["sim"][1][5])
+    savepath = "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_graph_newM/J1_$(load(sims[1])["sim"][1][5][J1_index])_50pts/"
+    for T_index in 1:length(load(sims[1])["sim"][1][4][J1_index])
+        plot_M2_vs_L(sims, savepath=savepath, J1_index=J1_index, T_index=T_index)
+    end
 end
 
 #=
 for J1_index in 1:length(load(sims[1])["sim"][1][5])
-    savepath = "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_graph_newM/J1_$(load(sims[1])["sim"][1][5][J1_index])/"
-    for T_index in 1:length(load(sims[1])["sim"][1][4][J1_index])
-        plot_M2_vs_L(sims, savepath=savepath, J1_index=J1_index, T_index=T_index)
-    end
-end=#
 
-for J1_index in 1:length(load(sims[1])["sim"][1][5])
+    savepath = "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_graph_newM/"
+    J1 = load(sims[1])["sim"][1][5][J1_index]
+    T = load(sims[1])["sim"][1][4][J1_index]
+    plot(dpi = 800,
+    seriestype = :scatter,
+    markerstrokewidth = 0.3,
+    markersize = 2,
+    xlabel = "T",
+    ylabel = "exponent",
+    title = "exponent_of_M2(with respect to N) vs T : J_0 = 1.0, Q = $Q, J1 = $J1",
+    legend = :topright,)
+
+    exponents = Float64[]
     for T_index in 1:length(load(sims[1])["sim"][1][4][J1_index])
-        exponent_fit(sims, J1_index=J1_index, T_index=T_index)
+        push!(exponents, exponent_fit(sims, J1_index=J1_index, T_index=T_index))
     end
+    plot!(T, exponents, label = "exponent")
+    savefig(savepath*"Q=$(Q)_J1=$(J1)"*"_exponent_vs_T"*".png")
+    save(savepath*"Q=$(Q)_J1=$(J1)_exponent_vs_T.jld", "exponents", exponents)
 end
+=#

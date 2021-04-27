@@ -1,5 +1,6 @@
 include("MC_Wolff_newM.jl")
 include("Temp_range_gen.jl")
+include("error_analysis.jl")
 
 """
 Run the simulation for a series of different temps.
@@ -9,7 +10,7 @@ Output:
 Simulation::Array{Array,1} : It's an array that is of length 5.
     1st entry : An array of Average E values for the simulated ranges of temperatures.
     2nd entry : An array of Average C values for the simulated ranges of temperatures.
-    3rd entry : An array of Average M2 values for the simulated ranges of temperatures.
+    3rd entry : An array of Average Binder's ratios for the simulated ranges of temperatures.
     4th entry : An array of ranges of temperatures that is simulated for different J1 values. Each entry correspond to one J1 value.
     5th entry : An array of simulated J1 values.
 
@@ -26,7 +27,7 @@ function driver(;
 
     Esim = []
     Csim = []
-    M2sim = []
+    Bsim = []
     simulation = []
     #=Temps = [
         [0.598,0.603],
@@ -43,7 +44,7 @@ function driver(;
         #Temp = Temp_range_gen(J = J1[k])
         Esamples = []
         Csamples = []
-        M2samples = []
+        Bsamples = []
         init_conf::Array{Int64,2} = ones(Int64, L, L)
         for T in Temp
             samples = sampling(
@@ -67,25 +68,37 @@ function driver(;
             Eavg = Eavg / L^2
             push!(Esamples, Eavg)
             push!(Csamples, C)
-            # Calculating M2
+            # Calculating B
+            M2_values = Float64[]
+            M4_values = Float64[]
             M2 = 0
+            M4 = 0
             for M in samples[1].M
                 Δ = cal_M2(M, Q)
                 M2 += Δ
+                M4 += Δ^2
+                push!(M2_values, Δ)
+                push!(M4_values, Δ^2)
             end
             M2 = M2 / samplelength
-            push!(M2samples, M2)
+            M4 = M4 / samplelength
+            B = 1 - M4 / (3 * M2^2)
+            println("L=$L, B = $B, M2=$M2, M4 = $M4")
+            M2_error = error_binning(M2_values)
+            M4_error = error_binning(M4_values)
+            println("error of B is estimated to be $(B*sqrt((M4_error/M4)^2+(2*M2_error/M2)^2)), error of M2 is $(M2_error), error of M4 is $(M4_error)")
+            push!(Bsamples, B)
             #output the final configuration as the initial conf for the next temperature.
             init_conf = samples[2]
         end
         push!(Esim, Esamples)
         push!(Csim, Csamples)
-        push!(M2sim, M2samples)
+        push!(Bsim, Bsamples)
         push!(Temperatures, Temp)
     end
     push!(simulation, Esim)
     push!(simulation, Csim)
-    push!(simulation, M2sim)
+    push!(simulation, Bsim)
     push!(simulation, Temperatures)
     push!(simulation, J1)
     #plot(Temp, Esamples)
@@ -94,16 +107,17 @@ function driver(;
     return simulation
 
 end
-L = 16;Q = 16;
-J1 = (0.0,0.2,0.6,0.85,1.15);sweeps = 10^6;Temp = [0.8]
+L = 8;Q = 16;
+J1 = [0.6]#=range(0.0, 1.15, length = 6)=#;sweeps = 10^6;Temp = [0.8]
 #range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
-content = "Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6"
+content = "Wolff_newM_J1000_115_Q5_sweep10e6"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
+
 
 #=
 my_time = Dates.now()
-save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/M2_result_newM/"
-#="E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/"=#
+save_path = "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/"
+#="/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result_newM/"=#
 time_finished = "Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))"
 save_name = save_path*content*"_L_$(L)__Q_$(Q)__sweeps_$(sweeps)_"*time_finished*".jld"
 save(save_name, "sim", [sim,(content, L, Q, sweeps)])

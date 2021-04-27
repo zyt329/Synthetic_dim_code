@@ -1,5 +1,6 @@
 include("MC_Wolff_newM.jl")
 include("Temp_range_gen.jl")
+include("error_analysis.jl")
 
 """
 Run the simulation for a series of different temps.
@@ -98,8 +99,8 @@ function driver(;
     return simulation
 
 end
-L = 16;Q = 6;
-J1 = range(0.0, 1.15, length = 6);sweeps = 10^4;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
+L = 8;Q = 16;
+J1 = range(0.0, 1.15, length = 6);sweeps = 10^6;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
 content = "Wolff_newM_J1000_115_Q5_sweep10e6"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
