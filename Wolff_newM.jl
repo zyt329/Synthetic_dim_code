@@ -78,7 +78,7 @@ function driver(;
             end
             M2 = M2 / samplelength
             M4 = M4 / samplelength
-            B = 1 - M4 / (3 * M2^2)
+            B = 1 - M4 / ((1+2/(Q-1)) * M2^2)
             push!(Bsamples, B)
             #output the final configuration as the initial conf for the next temperature.
             init_conf = samples[2]
@@ -99,14 +99,15 @@ function driver(;
     return simulation
 
 end
-L = 8;Q = 16;
-J1 = range(0.0, 1.15, length = 6);sweeps = 10^6;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
-content = "Wolff_newM_J1000_115_Q5_sweep10e6"
+L = 12;Q = 2;
+J1 = range(0.00, 1.15, length = 6);sweeps = 10^5;Temp = range(0.01, 10, length = 50)#Temp range determined by fcn in the driver, not here.
+content = "Wolff_newM_J1$(J1[1])_$(J1[end])_Q$(Q)_sweep$(sweeps)"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
 my_time = Dates.now()
 save_path = "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/"
-#="/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result_newM/"=#
+#"/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result_newM/"
+
 time_finished = "Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))"
 save_name = save_path*content*"_L_$(L)__Q_$(Q)__sweeps_$(sweeps)_"*time_finished*".jld"
 save(save_name, "sim", [sim,(content, L, Q, sweeps)])

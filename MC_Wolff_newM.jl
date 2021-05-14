@@ -136,7 +136,7 @@ function cal_M2(M::Array{Float64,1}, Q::Int64)
     M2 = 0
     for i = 1:Q
         for j = 1:Q
-            M2 += M[i] * M[j] * (Q * ==(M[i], M[j]) - 1) / (Q - 1)
+            M2 += M[i] * M[j] * (Q * ==(i,j) - 1) / (Q - 1)
         end
     end
     return M2
