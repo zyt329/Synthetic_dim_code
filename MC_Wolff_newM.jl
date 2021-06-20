@@ -92,7 +92,7 @@ function Wolff_update(conf::microstate, T::Float64)
 
     """
     discovered = Tuple{Int64,Int64}[]
-    new_val_range = vcat(-3:-1, 1:3)
+    new_val_range = (1:conf.Q)#vcat(-3:-1, 1:3)
     function search_flip(
         conf::microstate,
         current_index::Tuple{Int64,Int64},

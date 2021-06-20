@@ -1,4 +1,4 @@
-include("MC_Wolff_newM.jl")
+include("MC_corrected_newM.jl")
 include("Temp_range_gen.jl")
 include("error_analysis.jl")
 
@@ -99,8 +99,8 @@ function driver(;
     return simulation
 
 end
-L = 12;Q = 2;
-J1 = range(0.00, 1.15, length = 6);sweeps = 10^5;Temp = range(0.01, 10, length = 50)#Temp range determined by fcn in the driver, not here.
+L = 4;Q = 16;
+J1 = [0.6];sweeps = 10^6;Temp = range(0.01, 1.0, length = 50)#Temp range determined by fcn in the driver, not here.
 content = "Wolff_newM_J1$(J1[1])_$(J1[end])_Q$(Q)_sweep$(sweeps)"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 

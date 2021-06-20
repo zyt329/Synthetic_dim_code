@@ -1,4 +1,4 @@
-include("MC_Wolff_newM.jl")
+include("MC_corrected_newM.jl")
 include("Temp_range_gen.jl")
 include("error_analysis.jl")
 
@@ -82,8 +82,8 @@ function driver(;
             end
             M2 = M2 / samplelength
             M4 = M4 / samplelength
-            B = 1 - M4 / (3 * M2^2)
-            println("L=$L, B = $B, M2=$M2, M4 = $M4")
+            B = 1 - M4 / ((1+2/(Q-1)) * M2^2)
+            println("Wolff At T=$T, L=$L; B=$B, M2=$M2, M4=$M4, E=$Eavg, C=$C")
             M2_error = error_binning(M2_values)
             M4_error = error_binning(M4_values)
             println("error of B is estimated to be $(B*sqrt((M4_error/M4)^2+(2*M2_error/M2)^2)), error of M2 is $(M2_error), error of M4 is $(M4_error)")
@@ -107,11 +107,11 @@ function driver(;
     return simulation
 
 end
-L = 8;Q = 16;
-J1 = [0.6]#=range(0.0, 1.15, length = 6)=#;sweeps = 10^6;Temp = [0.8]
+L = 2;Q = 4;
+J1 = [0.6]#=range(0.0, 1.15, length = 6)=#;sweeps = 10^8;Temp = [0.5]
 #range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
 content = "Wolff_newM_J1000_115_Q5_sweep10e6"
-@time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
+sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
 
 #=

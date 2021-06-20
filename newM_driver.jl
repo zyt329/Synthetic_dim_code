@@ -100,12 +100,12 @@ function driver(;
 
 end
 L = 8;Q = 16;
-J1 = range(0.90, 1.15, length = 6);sweeps = 10^6;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
+J1 = [0.6];sweeps = 4*10^6;Temp = range(0.5, 0.7, length = 50)#Temp range determined by fcn in the driver, not here.
 content = "newM_nonperiodic_J1$(J1[1])_$(J1[end])_Q$(Q)_sweep$(sweeps)"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
 my_time = Dates.now()
-save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/Bcrossing_result_newM_nonperiodic/"
+save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/Large_system_result/"
 #"E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM_nonperiodic/"
 
 time_finished = "Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))"

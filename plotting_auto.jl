@@ -44,8 +44,8 @@ function sims_plotting(
                     plot!(
                         Temp,
                         simulations[i][1][k],
-                        label = simulations_paras[i][1] *
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                        label = #=simulations_paras[i][1] *=#
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             else
@@ -54,8 +54,8 @@ function sims_plotting(
                     plot!(
                         Temp,
                         simulations[i][1][k],
-                        label = simulations_paras[i][1] *
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                        label = #=simulations_paras[i][1] *=#
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             end
@@ -81,7 +81,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][3][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1=$(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1=$(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             else
@@ -91,7 +91,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][3][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             end
@@ -129,7 +129,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][2][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             else
@@ -139,7 +139,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][2][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             end
