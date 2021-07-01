@@ -100,7 +100,7 @@ function driver(;
 
 end
 L = 22; Q = 16
-J1 = [0.6];sweeps = 4*10^6;Temp = range(0.5, 0.7, length = 50)#Temp range determined by fcn in the driver, not here.
+J1 = [0.6];sweeps = 4*10^6;Temp = range(0.57, 0.61, length = 50)#Temp range determined by fcn in the driver, not here.
 content = "newM_periodic_J1$(J1[1])_$(J1[end])_Q$(Q)_sweep$(sweeps)"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 

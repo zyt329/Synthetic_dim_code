@@ -1,9 +1,9 @@
 include("plotting_auto.jl")
 
 sims = [
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Larger_system_result/newM_nonperiodic_J10.6_0.6_Q16_sweep4000000_L_18__Q_16__sweeps_4000000_Date_Sat_19_Jun_2021_22_08_50.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Larger_system_result/newM_nonperiodic_J10.6_0.6_Q16_sweep4000000_L_22__Q_16__sweeps_4000000_Date_Sun_20_Jun_2021_00_11_08.jld",
-    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Larger_system_result/newM_nonperiodic_J10.6_0.6_Q16_sweep4000000_L_26__Q_16__sweeps_4000000_Date_Sun_20_Jun_2021_02_37_00.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Larger_system_result/newM_periodic_J10.6_0.6_Q16_sweep4000000_L_18__Q_16__sweeps_4000000_Date_Sun_20_Jun_2021_23_13_39.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Larger_system_result/newM_periodic_J10.6_0.6_Q16_sweep4000000_L_22__Q_16__sweeps_4000000_Date_Mon_21_Jun_2021_02_58_48.jld",
+    "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Larger_system_result/newM_periodic_J10.6_0.6_Q16_sweep4000000_L_26__Q_16__sweeps_4000000_Date_Mon_21_Jun_2021_07_28_46.jld",
     #="E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/Wolff_newM_rev_J1060_085_Q16_sweep10e6_L_8__Q_16__sweeps_1000000_Date_Wed_12_May_2021_03_02_18.jld",
     "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/Wolff_newM_rev_J1060_085_Q16_sweep10e6_L_12__Q_16__sweeps_1000000_Date_Wed_12_May_2021_05_44_09.jld",
     "E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/Wolff_newM_rev_J1060_085_Q16_sweep10e6_L_16__Q_16__sweeps_1000000_Date_Wed_12_May_2021_10_58_21.jld",=#
