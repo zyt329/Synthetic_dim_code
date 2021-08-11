@@ -1,4 +1,4 @@
-include("MC_newM_periodic.jl")
+include("MC_newM.jl")
 include("Temp_range_gen.jl")
 include("error_analysis.jl")
 
@@ -84,7 +84,7 @@ function driver(;
             M4 = M4 / samplelength
             B = 1 - M4 / ((1+2/(Q-1)) * M2^2)
             println()
-            println("MCMC periodic interacftion At T=$T, L=$L; B=$B, M2=$M2, M4=$M4, E=$Eavg, C=$C")
+            println("MCMC nonperiodic interaction At T=$T, L=$L; B=$B, M2=$M2, M4=$M4, E=$Eavg, C=$C")
             M2_error = error_binning(M2_values)
             M4_error = error_binning(M4_values)
             println("error of B is estimated to be $(B*sqrt((M4_error/M4)^2+(2*M2_error/M2)^2)), error of M2 is $(M2_error), error of M4 is $(M4_error)")
