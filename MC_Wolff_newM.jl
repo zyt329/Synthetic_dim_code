@@ -92,7 +92,7 @@ function Wolff_update(conf::microstate, T::Float64)
 
     """
     discovered = Tuple{Int64,Int64}[]
-    new_val_range = vcat(-3:-1, 1:3)
+    new_val_range = (1:conf.Q)#vcat(-3:-1, 1:3)
     function search_flip(
         conf::microstate,
         current_index::Tuple{Int64,Int64},
@@ -136,7 +136,7 @@ function cal_M2(M::Array{Float64,1}, Q::Int64)
     M2 = 0
     for i = 1:Q
         for j = 1:Q
-            M2 += M[i] * M[j] * (Q * ==(M[i], M[j]) - 1) / (Q - 1)
+            M2 += M[i] * M[j] * (Q * ==(i,j) - 1) / (Q - 1)
         end
     end
     return M2

@@ -33,7 +33,7 @@ function sims_plotting(
             dpi = 800,
             xlabel = "T",
             ylabel = "E_site",
-            title = "E_site : J_0 = 1.0",
+            title = "E_site : J_0 = 1.0, Q = $(simulations_paras[1][3])",
             legend = :topleft,
         )
         for i = 1:length(simulations)#loop over different simulations(L,Q...)
@@ -44,8 +44,8 @@ function sims_plotting(
                     plot!(
                         Temp,
                         simulations[i][1][k],
-                        label = simulations_paras[i][1] *
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                        label = #=simulations_paras[i][1] *=#
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             else
@@ -54,8 +54,8 @@ function sims_plotting(
                     plot!(
                         Temp,
                         simulations[i][1][k],
-                        label = simulations_paras[i][1] *
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                        label = #=simulations_paras[i][1] *=#
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             end
@@ -68,7 +68,7 @@ function sims_plotting(
             dpi = 800,
             xlabel = "T",
             ylabel = "Binder's ratio",
-            title = "Binder's ratio : J_0 = 1.0",
+            title = "Binder's ratio : J_0 = 1.0, Q = $(simulations_paras[1][3])",
             legend = :bottomleft,
             legendfontsize=8,
         )
@@ -81,7 +81,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][3][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1=$(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1=$(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             else
@@ -91,7 +91,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][3][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             end
@@ -117,7 +117,7 @@ function sims_plotting(
             dpi = 800,
             xlabel = "T",
             ylabel = "C_site",
-            title = "C_site : J_0 = 1.0",
+            title = "C_site : J_0 = 1.0, Q = $(simulations_paras[1][3])",
             legend = :topleft,
         )
         for i = 1:length(simulations)#loop over different simulations(L,Q...)
@@ -129,7 +129,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][2][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             else
@@ -139,7 +139,7 @@ function sims_plotting(
                         Temp,
                         simulations[i][2][k],
                         label = #=simulations_paras[i][1] *=#
-                                "_J1 = $(J1s[k]),L$(simulations_paras[i][2])",
+                                "J1 = $(J1s[k]),L$(simulations_paras[i][2])",
                     )
                 end
             end

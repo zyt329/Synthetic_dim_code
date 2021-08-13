@@ -95,10 +95,12 @@ function driver(;
 
 end
 L = 16;Q = 16;
-J1 = (0.0,0.2,0.6,0.85,1.15);sweeps = 10^6;Temp = range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
+J1 = (0.0,0.2,0.6,0.85,1.15);sweeps = 10^6;Temp = [0.8]
+#range(0.01, 1, length = 50)#Temp range determined by fcn in the driver, not here.
 content = "Wolff_newM_M2_J100_02_06_085_115_Q16_sweep10e6"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
+#=
 my_time = Dates.now()
 save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/M2_result_newM/"
 #="E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM/"=#
@@ -117,3 +119,4 @@ println("L=$L, Q=$Q, Wolff_fineTemp4_10e7 finished at $(Dates.format(my_time, "e
     sim,
 )=#
 println("L=$L, Q=$Q,"*content*" finished at "*time_finished)
+=#
