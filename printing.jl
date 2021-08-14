@@ -1,9 +1,9 @@
 using JLD
 
 sims = [
-    "D:/UC Davis/Research/Synthetic Dimension/Synthetic_dim_code/Bcrossing_result_newM/Wolff_newM_J1060_085_sweep10e6_L_8__Q_16__sweeps_1000000_Date_Wed_14_Apr_2021_05_07_46.jld",
-    "D:/UC Davis/Research/Synthetic Dimension/Synthetic_dim_code/Bcrossing_result_newM/Wolff_newM_J1060_085_sweep10e6_L_12__Q_16__sweeps_1000000_Date_Wed_14_Apr_2021_07_58_35.jld",
-    "D:/UC Davis/Research/Synthetic Dimension/Synthetic_dim_code/Bcrossing_result_newM/Wolff_newM_J1060_085_sweep10e6_L_16__Q_16__sweeps_1000000_Date_Wed_14_Apr_2021_12_26_04.jld",
+    "D:/UC Davis/Research/Synthetic Dimension/Synthetic_dim_code/Bcrossing_result_newM/newM_nonperiodic_J10.0_0.25_Q16_sweep1000000_L_8__Q_16__sweeps_1000000_Date_Fri_14_May_2021_18_43_17.jld",
+    "D:/UC Davis/Research/Synthetic Dimension/Synthetic_dim_code/Bcrossing_result_newM/newM_nonperiodic_J10.0_0.25_Q16_sweep1000000_L_12__Q_16__sweeps_1000000_Date_Fri_14_May_2021_20_14_08.jld",
+    "D:/UC Davis/Research/Synthetic Dimension/Synthetic_dim_code/Bcrossing_result_newM/newM_nonperiodic_J10.0_0.25_Q16_sweep1000000_L_16__Q_16__sweeps_1000000_Date_Fri_14_May_2021_22_19_18.jld",
 ]
 
 function printing(sims)
