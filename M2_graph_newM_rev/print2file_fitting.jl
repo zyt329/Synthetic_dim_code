@@ -2,6 +2,7 @@ using JLD
 using Plots
 using LsqFit
 using Statistics
+using DelimitedFiles
 
 J1_index = 1
 
@@ -47,7 +48,7 @@ function M2_vs_L(sims; J1_index::Int64, T_index::Int64)
     return Dict(:N=>Ns, :M2=>M2s)
 end
 
-function print2file_M2_vs_L(sims; savepath::String, J1_index::Int64, T_index::Int64, save_name)
+function print2file_M2_vs_L(sims; save_path::String, J1_index::Int64, T_index::Int64, save_name)
     Q = load(sims[1])["sim"][2][3]
     J1 = load(sims[1])["sim"][1][5][J1_index]
     T = load(sims[1])["sim"][1][4][J1_index][T_index]
@@ -82,4 +83,4 @@ end
 
 exponent_fit(sims; J1_index=4, T_index=50)
 
-#print2file_M2_vs_L(sims; savepath="E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/", J1_index=4, T_index=50, save_name = "lnM2_vs_lnN")
+print2file_M2_vs_L(sims; save_path="E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/M2_result_newM/", J1_index=1, T_index=33, save_name = "lnM2_vs_lnN")

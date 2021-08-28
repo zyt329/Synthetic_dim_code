@@ -13,6 +13,7 @@ Simulation::Array{Array,1} : It's an array that is of length 5.
     3rd entry : An array of Average Binder's ratios for the simulated ranges of temperatures.
     4th entry : An array of ranges of temperatures that is simulated for different J1 values. Each entry correspond to one J1 value.
     5th entry : An array of simulated J1 values.
+    6th entry : An Array of Average M2 values for the simulated ranges of temperatures(of different J1 values).
 
 """
 function driver(;
@@ -29,6 +30,7 @@ function driver(;
     Csim = []
     Bsim = []
     simulation = []
+    M2sim = []
     #=Temps = [
         [0.598,0.603],
         [0.573,0.588],
@@ -45,6 +47,7 @@ function driver(;
         Esamples = []
         Csamples = []
         Bsamples = []
+        M2samples = []
         init_conf::Array{Int64,2} = ones(Int64, L, L)
         for T in Temp
             samples = sampling(
@@ -77,6 +80,7 @@ function driver(;
                 M4 += Δ^2
             end
             M2 = M2 / samplelength
+            push!(M2samples, M2)
             M4 = M4 / samplelength
             B = 1 - M4 / ((1+2/(Q-1)) * M2^2)
             push!(Bsamples, B)
@@ -87,25 +91,35 @@ function driver(;
         push!(Csim, Csamples)
         push!(Bsim, Bsamples)
         push!(Temperatures, Temp)
+        push!(M2sim, M2samples)
     end
     push!(simulation, Esim)
     push!(simulation, Csim)
     push!(simulation, Bsim)
     push!(simulation, Temperatures)
     push!(simulation, J1)
+    push!(simulation, M2sim)
     #plot(Temp, Esamples)
     #plot!(Temp, Csamples)
 
     return simulation
 
 end
-L = 8;Q = 16;
-J1 = [0.6];sweeps = 4*10^6;Temp = range(0.57, 0.61, length = 50)#Temp range determined by fcn in the driver, not here.
-content = "newM_nonperiodic_J1$(J1[1])_$(J1[end])_Q$(Q)_sweep$(sweeps)"
+L = 16;Q = 16;
+J1 = [0.8];sweeps = 4*10^6;critical_region1 = [0.1, 0.3];critical_region2 = [0.55,0.8]
+Temp = cat(range(0.01, critical_region1[1]-0.01, length = 10),#beginning part
+range(critical_region1[1], critical_region1[2], length = 50),#1st critical region
+range(critical_region1[2], critical_region1[1], length = 50),#1st critical region backward
+range(critical_region1[2]+0.01, critical_region2[1], length = 10),#between critical regions
+range(critical_region2[1]+0.01, critical_region2[2], length = 50),#2nd critical region
+range(critical_region2[2]+0.01, critical_region2[1], length = 50),#2nd critical region backward
+range(critical_region2[2]+0.01, 1, length = 10),#last part
+dims=1)#Temp range determined by fcn in the driver, not here.
+content = "newM_nonperiodic_M2added_hysteresis_J1$(J1[1])_$(J1[end])_Q$(Q)_sweep$(sweeps)"
 @time sim = driver(L = L, Q = Q, J1 = J1, sweeps = sweeps, Temp = Temp)
 
 my_time = Dates.now()
-save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/Large_system_result/"
+save_path = "/nfs/home/zyt329/Research/Synthetic_dim_code/paper_result/"
 #"E:/UC Davis/Research/Synthetic Dimensions/Synthetic_dim_code/Bcrossing_result_newM_nonperiodic/"
 
 time_finished = "Date_$(Dates.format(my_time, "e_dd_u_yyyy_HH_MM_SS"))"
